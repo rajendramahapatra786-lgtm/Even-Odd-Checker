@@ -26,14 +26,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: bgMove 6s infinite alternate;
     transition: 0.4s;
-}
-
-/* Background animation */
-@keyframes bgMove {
-    0% { background-position: left; }
-    100% { background-position: right; }
 }
 
 /* ---------- Container ---------- */
@@ -45,23 +38,35 @@ body {
     width: 350px;
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    animation: slideUp 1s ease;
+    animation: floatCard 4s ease-in-out infinite;
 }
 
-/* Card animation */
-@keyframes slideUp {
-    from {
-        transform: translateY(40px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+@keyframes floatCard {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 
-h1 {
+/* ---------- Title ---------- */
+.title {
+    font-size: 26px;
     margin-bottom: 20px;
+    background: linear-gradient(
+        90deg,
+        #ff6ec4,
+        #7873f5,
+        #4ade80,
+        #facc15
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 4s infinite linear;
+}
+
+@keyframes gradientText {
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
 }
 
 /* ---------- Input ---------- */
@@ -91,10 +96,31 @@ button {
     color: white;
     cursor: pointer;
     transition: 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
     transform: scale(1.05);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Button glow */
+button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+button:hover::after {
+    opacity: 1;
 }
 
 /* ---------- Result ---------- */
@@ -102,16 +128,53 @@ button:hover {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    animation: fadeIn 0.5s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.even {
+    color: #2ecc71;
+    text-shadow: 0 0 10px #2ecc71;
+    animation: pop 0.4s ease;
 }
 
-.even { color: #2ecc71; }
-.odd  { color: #e74c3c; }
+.odd {
+    color: #e74c3c;
+    text-shadow: 0 0 10px #e74c3c;
+    animation: shake 0.4s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* ---------- Glow Line ---------- */
+.glow-line {
+    height: 4px;
+    margin-top: 20px;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        #ff6ec4,
+        #7873f5,
+        #4ade80,
+        #facc15
+    );
+    background-size: 300%;
+    animation: glowMove 3s infinite linear;
+}
+
+@keyframes glowMove {
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
+}
 
 /* ---------- Footer ---------- */
 footer {
@@ -120,24 +183,12 @@ footer {
     width: 100%;
     text-align: center;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    animation: fadeUp 1.5s ease;
+    color: rgba(255,255,255,0.8);
 }
 
 footer span {
     color: #ffd700;
     font-weight: bold;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* ---------- Theme Toggle ---------- */
@@ -149,26 +200,4 @@ footer span {
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.theme-toggle:hover {
-    transform: scale(1.2);
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 480px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    footer {
-        font-size: 12px;
-        bottom: 10px;
-    }
 }

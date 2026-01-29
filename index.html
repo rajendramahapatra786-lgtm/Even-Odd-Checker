@@ -8,15 +8,21 @@
 </head>
 <body>
 
-    <!-- Dark / Light Mode Button -->
+    <!-- Theme Toggle Button -->
     <button class="theme-toggle" id="themeToggle">🌙</button>
 
     <!-- Main Card -->
     <div class="container">
-        <h1>Even/Odd Checker</h1>
+        <h1 class="title">✨ Even / Odd Checker ✨</h1>
+
+        <label for="number" style="display:none;">Enter a number</label>
         <input type="number" id="number" placeholder="Enter a number">
-        <button>Check</button>
+
+        <button disabled>Check</button>
+
         <p id="result"></p>
+
+        <div class="glow-line"></div>
     </div>
 
     <!-- Footer -->

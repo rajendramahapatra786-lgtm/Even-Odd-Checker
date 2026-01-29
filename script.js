@@ -1,7 +1,6 @@
 /* ---------- Theme Toggle ---------- */
 const themeToggle = document.getElementById("themeToggle");
 
-// Load saved theme
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
     themeToggle.textContent = "☀️";
@@ -24,20 +23,32 @@ const input = document.getElementById("number");
 const result = document.getElementById("result");
 const button = document.querySelector(".container button");
 
+button.disabled = true;
+
+input.addEventListener("input", () => {
+    button.disabled = input.value === "";
+});
+
 button.addEventListener("click", checkEvenOdd);
 
-input.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
+input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && !button.disabled) {
         checkEvenOdd();
     }
 });
 
 function checkEvenOdd() {
-    const num = input.value;
+    const num = Number(input.value);
     result.className = "";
 
-    if (num === "") {
+    if (input.value === "") {
         result.textContent = "Please enter a number";
+        result.style.color = "#999";
+        return;
+    }
+
+    if (!Number.isInteger(num)) {
+        result.textContent = "Please enter an integer number";
         result.style.color = "#999";
         return;
     }
@@ -50,3 +61,4 @@ function checkEvenOdd() {
         result.classList.add("odd");
     }
 }
+
