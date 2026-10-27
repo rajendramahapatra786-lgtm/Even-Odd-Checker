@@ -139,6 +139,7 @@ B.Tech in Computer Science & Engineering
 
 ---
 
+## ⭐ Support
 
-⭐ **If you found this project useful, consider giving the repository a star!**
+ **If you found this project useful, consider giving the repository a star!**
 
