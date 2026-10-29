@@ -135,7 +135,6 @@ Possible enhancements:
 
 **Rajendra Mahapatra**
 
-B.Tech in Computer Science & Engineering
 
 ---
 
